@@ -1,11 +1,11 @@
-﻿using DataAccessLibrary2.ConString;
-using DataAccessLibrary2.DataAccess.Query;
-using DataAccessLibrary2.DataFromDB.Employee;
-using DataAccessLibrary2.Model;
+﻿using DataAccessLibrary_netCore.ConString;
+using DataAccessLibrary_netCore.DataAccess.Query;
+using DataAccessLibrary_netCore.DataFromDB.Employee;
+using DataAccessLibrary_netCore.Dependency;
+using DataAccessLibrary_netCore.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using MVC1.Dependency;
 using MVC1.Models;
 using System;
 using System.Collections.Generic;

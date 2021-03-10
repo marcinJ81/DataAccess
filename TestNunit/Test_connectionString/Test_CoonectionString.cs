@@ -1,4 +1,4 @@
-﻿using DataAccessLibrary2.ConString;
+﻿using DataAccessLibrary_netCore.ConString;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
