@@ -19,13 +19,12 @@ namespace MVC1.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private IDependencyInversion connectToMSSql;
-        private List<ModelEmployee> modelEmployees;
         private IQueryEmployee queryEmployee;
 
         public HomeController(ILogger<HomeController> logger, IConfiguration configuration, IDependencyInversion connectToMSSql)
         {
             _logger = logger;
-            this.connectToMSSql = connectToMSSql.CreateObject_MSsql(configuration, "Dev");
+            this.connectToMSSql = connectToMSSql.CreateObject_MSsql(configuration, "Production");
             queryEmployee = new QueryEmployee(this.connectToMSSql.GetISqlDataAccess);
 
         }

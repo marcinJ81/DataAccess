@@ -9,31 +9,38 @@ using System.Threading.Tasks;
 
 namespace MVC1.Dependency
 {
-    public class DependencyInversion : IDependencyInversion
+    /// <summary>
+    /// name of class is not good
+    /// </summary>
+    /// CreatorOfDBConnection
+    public class CreatorOfDBConnection : ICreatorOfDBConnection
     {
         private IConnectStringAccess constring;
         private ISQLDataAccessQuery query;
+        /// <summary>
+        /// this is not gut solution, pattern?
+        /// </summary>
         public ISQLDataAccessQuery GetISqlDataAccess => query;
 
-        public DependencyInversion(){}
-        private DependencyInversion(IConfiguration config, string constringTypes)
+        public CreatorOfDBConnection(){}
+        private CreatorOfDBConnection(IConfiguration config, string constringTypes)
         {
             constring = new ConnectStringAccess(config, constringTypes);
             query = new SQLDataAccessQuery(constring);
         }
-        private DependencyInversion(string tableNameSqlite)
+        private CreatorOfDBConnection(string tableNameSqlite)
         {
             constring = new ConnectStringAccess(tableNameSqlite);
             query = new SQLDataAccessQuery(constring);
         }
 
-        public DependencyInversion CreateObject_MSsql(IConfiguration config, string constringTypes)
+        public CreatorOfDBConnection CreateObject_MSsql(IConfiguration config, string constringTypes)
         {
-            return new DependencyInversion(config, constringTypes);
+            return new CreatorOfDBConnection(config, constringTypes);
         }
-        public DependencyInversion CreateObject_SQLite(string tableNameSqlite)
+        public CreatorOfDBConnection CreateObject_SQLite(string tableNameSqlite)
         {
-            return new DependencyInversion(tableNameSqlite);
+            return new CreatorOfDBConnection(tableNameSqlite);
         }
     }
 }

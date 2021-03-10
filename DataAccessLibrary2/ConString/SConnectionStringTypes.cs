@@ -11,7 +11,7 @@ namespace DataAccessLibrary2.ConString
         static SConnectionStringTypes()
         {
             dictionaryTypes = new Dictionary<string, string>();
-            dictionaryTypes.Add("Prodcution", "Production");
+            dictionaryTypes.Add("Production", "Production");
             dictionaryTypes.Add("Dev", "Dev");
         }
 

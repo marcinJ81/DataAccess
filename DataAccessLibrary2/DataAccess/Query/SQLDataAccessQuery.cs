@@ -19,8 +19,8 @@ namespace DataAccessLibrary2.DataAccess.Query
     public class SQLDataAccessQuery : ISQLDataAccessQuery
     {
         private string constring { get; set; }
-        private IDbConnection connectionToMSSQL;
-        private IDbConnection connectionToSQLite;
+        //private IDbConnection connectionToMSSQL; //do wykorzystania w tym miejsu zamiast ifa
+        //private IDbConnection connectionToSQLite;
 
         public SQLDataAccessQuery(IConnectStringAccess connectionStringAccess )
         {
