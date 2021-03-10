@@ -1,10 +1,10 @@
-﻿using DataAccessLibrary2.DataAccess.Query;
-using DataAccessLibrary2.Model;
+﻿using DataAccessLibrary_netCore.DataAccess.Query;
+using DataAccessLibrary_netCore.Model;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 
-namespace DataAccessLibrary2.DataFromDB.Employee
+namespace DataAccessLibrary_netCore.DataFromDB.Employee
 {
     public interface IQueryEmployee
     {

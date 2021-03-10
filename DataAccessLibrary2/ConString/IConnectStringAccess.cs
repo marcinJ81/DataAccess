@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace DataAccessLibrary2.ConString
+namespace DataAccessLibrary_netCore.ConString
 {
     public interface IConnectStringAccess
     {

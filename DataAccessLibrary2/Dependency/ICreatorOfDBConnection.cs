@@ -1,7 +1,7 @@
-﻿using DataAccessLibrary2.DataAccess.Query;
+﻿using DataAccessLibrary_netCore.DataAccess.Query;
 using Microsoft.Extensions.Configuration;
 
-namespace DataAccessLibrary2.Dependency
+namespace DataAccessLibrary_netCore.Dependency
 {
     public interface ICreatorOfDBConnection
     {

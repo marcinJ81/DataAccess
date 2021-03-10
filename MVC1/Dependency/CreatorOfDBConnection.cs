@@ -1,6 +1,6 @@
-﻿using DataAccessLibrary2.ConString;
-using DataAccessLibrary2.DataAccess.Query;
-using DataAccessLibrary2.DataFromDB.Employee;
+﻿using DataAccessLibrary_netCore.ConString;
+using DataAccessLibrary_netCore.DataAccess.Query;
+using DataAccessLibrary_netCore.DataFromDB.Employee;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataAccessLibrary2.Model
+namespace DataAccessLibrary_netCore.Model
 {
     public class ModelEmployee
     {

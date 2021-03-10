@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataAccessLibrary2.ConString
+namespace DataAccessLibrary_netCore.ConString
 {
     public class FactoryConnectionString : IConnectStringAccess
     {

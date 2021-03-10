@@ -1,4 +1,4 @@
-﻿using DataAccessLibrary2.DataAccess.Query;
+﻿using DataAccessLibrary_netCore.DataAccess.Query;
 using Microsoft.Extensions.Configuration;
 
 namespace MVC1.Dependency
