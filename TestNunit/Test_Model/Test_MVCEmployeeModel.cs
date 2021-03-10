@@ -41,16 +41,17 @@ namespace TestNunit.Test_Model
         [Test]
         public void ShouldGetAnyRecordFromEmployeeTable()
         {
-            // This workaround is necessary on Xamarin,
-            // which doesn't support async unit test methods.
-            //Task.Run(async () =>
-            //{
-            //    // Actual test code here.
-            //}).GetAwaiter().GetResult();
-
+            
             queryEmployee = new QueryEmployee(this.connectToMSSql.GetISqlDataAccess);
-            List<ModelEmployee> result =  queryEmployee.GetEmployees_sync(dbType.mssql);
-            Assert.IsTrue(result.Any());
+            Task.Run(async () =>
+            {
+               var result = await queryEmployee.GetEmployees_async(dbType.mssql);
+                // Actual test code here.
+                Assert.IsTrue(result.Any());
+            }).GetAwaiter().GetResult();
+
+            //List<ModelEmployee> result =  queryEmployee.GetEmployees_sync(dbType.mssql);
+            //Assert.IsTrue(result.Any());
 
         }
     }
