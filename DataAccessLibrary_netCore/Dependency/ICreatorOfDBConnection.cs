@@ -1,7 +1,7 @@
 ﻿using DataAccessLibrary_netCore.DataAccess.Query;
 using Microsoft.Extensions.Configuration;
 
-namespace MVC1.Dependency
+namespace DataAccessLibrary_netCore.Dependency
 {
     public interface ICreatorOfDBConnection
     {

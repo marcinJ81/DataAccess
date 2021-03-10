@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MVC1.Dependency
+namespace DataAccessLibrary_netCore.Dependency
 {
     /// <summary>
     /// name of class is not good
