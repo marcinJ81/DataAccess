@@ -18,10 +18,10 @@ namespace MVC1.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private IDependencyInversion connectToMSSql;
+        private ICreatorOfDBConnection connectToMSSql;
         private IQueryEmployee queryEmployee;
 
-        public HomeController(ILogger<HomeController> logger, IConfiguration configuration, IDependencyInversion connectToMSSql)
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration, ICreatorOfDBConnection connectToMSSql)
         {
             _logger = logger;
             this.connectToMSSql = connectToMSSql.CreateObject_MSsql(configuration, "Production");

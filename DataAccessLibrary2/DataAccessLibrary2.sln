@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLibrary2", "DataA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestNunit", "..\TestNunit\TestNunit.csproj", "{48CFCB9E-E466-404A-A763-CBB2E9A34CD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC1", "..\MVC1\MVC1.csproj", "{7B5C1C7E-F3C8-4003-A673-3BDA10C8D297}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVC1", "..\MVC1\MVC1.csproj", "{7B5C1C7E-F3C8-4003-A673-3BDA10C8D297}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

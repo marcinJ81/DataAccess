@@ -8,7 +8,7 @@ namespace TestNunit.Test_Model
 {
    public class Test_MVCEmployeeModel
     {
-        private ICreatorOfDBConnection 
+
 
         [SetUp]
         public void Setup()
