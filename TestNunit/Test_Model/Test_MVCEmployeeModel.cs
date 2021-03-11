@@ -19,7 +19,8 @@ namespace TestNunit.Test_Model
         private IConfiguration configuration;
         private ISQLDataAccessQuery accessQuery;
         private IQueryEmployee queryEmployee;
-        
+        private IQueryEmployee_withParam queryEmployeeParam;
+
         [SetUp]
         public void Setup()
         {
@@ -52,6 +53,20 @@ namespace TestNunit.Test_Model
 
             //List<ModelEmployee> result =  queryEmployee.GetEmployees_sync(dbType.mssql);
             //Assert.IsTrue(result.Any());
+
+        }
+        [Test]
+        public void ShouldGetRows_async()
+        {
+            queryEmployeeParam = new QueryEmployee_withParam(accessQuery);
+            Task.Run(async () =>
+            {
+
+                var result = await queryEmployeeParam.GetEmployeeWithParameters(dbType.mssql);
+                // Actual test code here.
+                Assert.Greater(result.Count,1);
+               
+            }).GetAwaiter().GetResult();
 
         }
     }
