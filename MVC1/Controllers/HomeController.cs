@@ -24,8 +24,7 @@ namespace MVC1.Controllers
         public HomeController(ILogger<HomeController> logger, IConfiguration configuration, ICreatorOfDBConnection connectToMSSql)
         {
             _logger = logger;
-            this.connectToMSSql = connectToMSSql.CreateObject_MSsql(configuration, "Production");
-            queryEmployee = new QueryEmployee(this.connectToMSSql.GetISqlDataAccess);
+            queryEmployee = new QueryEmployee(connectToMSSql.CreateObject_MSsql(configuration, "Production"));
 
         }
 

@@ -17,7 +17,7 @@ namespace TestNunit.Test_Model
     {
 
         private IConfiguration configuration;
-        private ICreatorOfDBConnection connectToMSSql;
+        private ISQLDataAccessQuery accessQuery;
         private IQueryEmployee queryEmployee;
         
         [SetUp]
@@ -34,18 +34,18 @@ namespace TestNunit.Test_Model
                 .AddInMemoryCollection(inMemorySettings)
                 .Build();
             var result = SDependencyContainer.getCreatorOfDBConnection;
-            this.connectToMSSql = result.CreateObject_MSsql(configuration, "Production");
-            
+            accessQuery = result.CreateObject_MSsql(configuration, "Production");  
         }
 
         [Test]
         public void ShouldGetAnyRecordFromEmployeeTable()
         {
-            
-            queryEmployee = new QueryEmployee(this.connectToMSSql.GetISqlDataAccess);
+
+            queryEmployee = new QueryEmployee(accessQuery);
             Task.Run(async () =>
             {
-               var result = await queryEmployee.GetEmployees_async(dbType.mssql);
+
+                var result = await queryEmployee.GetEmployees_async(dbType.mssql);
                 // Actual test code here.
                 Assert.IsTrue(result.Any());
             }).GetAwaiter().GetResult();
