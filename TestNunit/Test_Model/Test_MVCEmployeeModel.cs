@@ -78,7 +78,7 @@ namespace TestNunit.Test_Model
 
                 var result = await queryEmployeeParam.GetEmployeeWithParametersAndQuery(dbType.mssql);
                 // Actual test code here.
-                Assert.Greater(result.Count, 48);
+                Assert.Greater(result.Count, 19);
 
             }).GetAwaiter().GetResult();
         }

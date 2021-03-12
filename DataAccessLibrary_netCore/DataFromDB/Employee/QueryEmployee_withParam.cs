@@ -32,9 +32,9 @@ namespace DataAccessLibrary_netCore.DataFromDB.Employee
         public Task<List<ModelEmployee>> GetEmployeeWithParametersAndQuery(dbType db_type)
         {
             //string sql = "select employee_id,employee_name from dbo.employee";
-           
 
-            var resultQuery = SQuerySelected.GetSavedScrtipts();
+
+            var resultQuery = SQuerySelected.GetScritps;
            // var parameters = new DynamicParameters();
             //parameters.Add("@emloyee_id", 50, DbType.Int32);
 

@@ -8,10 +8,17 @@ namespace DataAccessLibrary_netCore.DataAccess.Query
 {
     public static class SQuerySelected
     {
+        private static List<TableScripts> tableScripts1;
+        public static List<TableScripts> GetScritps => tableScripts1;
+        static SQuerySelected()
+        {
+             tableScripts1 = new List<TableScripts>();
+            tableScripts1 = GetSavedScrtipts();
+        }
         public  static List<TableScripts> GenerateScripts(string sciptName,string nameTable,string script, DynamicParameters paramters)
         {
-            List<TableScripts> tableScripts = new List<TableScripts>();
-            tableScripts.Add
+           // List<TableScripts> tableScripts = new List<TableScripts>();
+            tableScripts1.Add
                 (
                     new TableScripts 
                     { 
@@ -21,23 +28,23 @@ namespace DataAccessLibrary_netCore.DataAccess.Query
                         paramters = paramters
                     }
                 );
-            return tableScripts;
+            return tableScripts1;
         }
        
-        public static List<TableScripts> GetSavedScrtipts()
+        private static List<TableScripts> GetSavedScrtipts()
         {
-            List<TableScripts> tableScripts = new List<TableScripts>();
+           // List<TableScripts> tableScripts = new List<TableScripts>();
 
             DynamicParameters dynamicParameters0 = new DynamicParameters();
             dynamicParameters0.Add("@param_id", 50, DbType.Int32);
-            tableScripts.Add(new TableScripts
+            tableScripts1.Add(new TableScripts
             {
                 ScriptName = "GetEmloyeeWhenIdBiggerThen",
                 NameTable = "Employee",
                 Script = "select * from dbo.employee where employee_id > @param_id",
                 paramters = dynamicParameters0
             }); ;
-            return tableScripts;
+            return tableScripts1;
         }
     }
     public class TableScripts
