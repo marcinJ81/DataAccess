@@ -8,6 +8,6 @@ namespace DataAccessLibrary_netCore.DataFromDB.Employee
     public interface IQueryEmployee_withParam
     {
         Task<List<ModelEmployee>> GetEmployeeWithParameters(dbType db_type);
-        Task<List<ModelEmployee>> GetEmployeeWithParametersAndQuery(dbType db_type);
+        Task<List<ModelEmployee>> GetEmployeeWithParametersAndQuery(TableScripts tableScript,dbType db_type);
     }
 }

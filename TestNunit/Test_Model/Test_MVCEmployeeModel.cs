@@ -73,10 +73,12 @@ namespace TestNunit.Test_Model
         public void ShoulGetRows_asyncSQueryDictionary()
         {
             queryEmployeeParam = new QueryEmployee_withParam(accessQuery);
+            var resultQuery = SQuerySelected.GetScritps;
+            var query = resultQuery.Where(x => x.ScriptName == "GetEmloyeeWhenIdBiggerThen").First();
             Task.Run(async () =>
             {
 
-                var result = await queryEmployeeParam.GetEmployeeWithParametersAndQuery(dbType.mssql);
+                var result = await queryEmployeeParam.GetEmployeeWithParametersAndQuery(query,dbType.mssql);
                 // Actual test code here.
                 Assert.Greater(result.Count, 19);
 
