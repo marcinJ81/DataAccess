@@ -20,17 +20,19 @@ namespace MVC1.Controllers
         private readonly ILogger<HomeController> _logger;
         private ICreatorOfDBConnection connectToMSSql;
         private IQueryEmployee queryEmployee;
+        private IQueryEmployee_withParam queryEmployee_With;
 
         public HomeController(ILogger<HomeController> logger, IConfiguration configuration, ICreatorOfDBConnection connectToMSSql)
         {
             _logger = logger;
             queryEmployee = new QueryEmployee(connectToMSSql.CreateObject_MSsql(configuration, "Production"));
-
+            queryEmployee_With = new QueryEmployee_withParam(connectToMSSql.CreateObject_MSsql(configuration, "Production"));
         }
 
         public async Task<ActionResult> Index()
         {
-            var employee = await queryEmployee.GetEmployees_async(dbType.mssql);
+            // var employee = await queryEmployee.GetEmployees_async(dbType.mssql);
+            var employee = await queryEmployee_With.GetEmployeeWithParameters(dbType.mssql);
             return View(employee);
         }
 
