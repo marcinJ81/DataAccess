@@ -69,5 +69,18 @@ namespace TestNunit.Test_Model
             }).GetAwaiter().GetResult();
 
         }
+        [Test]
+        public void ShoulGetRows_asyncSQueryDictionary()
+        {
+            queryEmployeeParam = new QueryEmployee_withParam(accessQuery);
+            Task.Run(async () =>
+            {
+
+                var result = await queryEmployeeParam.GetEmployeeWithParametersAndQuery(dbType.mssql);
+                // Actual test code here.
+                Assert.Greater(result.Count, 48);
+
+            }).GetAwaiter().GetResult();
+        }
     }
 }

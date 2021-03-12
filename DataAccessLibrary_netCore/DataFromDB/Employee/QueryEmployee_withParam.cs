@@ -4,6 +4,7 @@ using DataAccessLibrary_netCore.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,6 +27,22 @@ namespace DataAccessLibrary_netCore.DataFromDB.Employee
 
             string sql = @"select * from employee where employee_id > @emloyee_id";
             return sQLDataAccessQuery.loadData_async<ModelEmployee, dynamic>(sql, parameters, db_type);
+        }
+
+        public Task<List<ModelEmployee>> GetEmployeeWithParametersAndQuery(dbType db_type)
+        {
+            //string sql = "select employee_id,employee_name from dbo.employee";
+           
+
+            var resultQuery = SQuerySelected.GetSavedScrtipts();
+           // var parameters = new DynamicParameters();
+            //parameters.Add("@emloyee_id", 50, DbType.Int32);
+
+            //string sql = @"select * from employee where employee_id > @emloyee_id";
+
+            var queryProp = resultQuery.Where(x => x.ScriptName == "GetEmloyeeWhenIdBiggerThen").First();
+
+            return sQLDataAccessQuery.loadData_async<ModelEmployee, dynamic>(queryProp.Script, queryProp.paramters, db_type);
         }
     }
 }
