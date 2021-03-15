@@ -13,7 +13,6 @@ namespace TestNunit.Test_Model
 {
    public class Test_GetEmployees
     {
-        private IQueryEmployee GetEmployee;
         private IConnectStringAccess constring;
         private ISQLDataAccessQuery query;
         [SetUp]
@@ -21,7 +20,6 @@ namespace TestNunit.Test_Model
         {
             constring = new ConnectStringAccess("Employee");
             query = new SQLDataAccessQuery(constring);
-            GetEmployee = new QueryEmployee(query);
         }
 
         [Test]

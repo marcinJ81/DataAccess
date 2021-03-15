@@ -33,8 +33,6 @@ namespace DataAccessLibrary_netCore.DataAccess.Query
        
         private static List<TableScripts> GetSavedScrtipts()
         {
-          
-
             DynamicParameters dynamicParameters0 = new DynamicParameters();
             dynamicParameters0.Add("@param_id", 50, DbType.Int32);
             tableScripts1.Add(new TableScripts
@@ -43,7 +41,15 @@ namespace DataAccessLibrary_netCore.DataAccess.Query
                 NameTable = "Employee",
                 Script = "select * from dbo.employee where employee_id > @param_id",
                 paramters = dynamicParameters0
-            }); ;
+            });
+            DynamicParameters emptyDynamicParameters = new DynamicParameters();
+            tableScripts1.Add(new TableScripts
+            {
+                ScriptName = "GetAllEmployees",
+                NameTable = "Employee",
+                Script = "select employee_id, employee_name from employee ",
+                paramters = emptyDynamicParameters
+            });
             return tableScripts1;
         }
     }
