@@ -21,7 +21,7 @@ namespace DataAccessLibrary_netCore.DataFromDB.Employee
 
         public Task<List<ModelEmployee>> GetEmployeeWithParameters(dbType db_type)
         {
-            //string sql = "select employee_id,employee_name from dbo.employee";
+            
             var parameters = new DynamicParameters();
             parameters.Add("@emloyee_id", 50, DbType.Int32);
 

@@ -5,13 +5,13 @@ using System.Text;
 
 namespace DataAccessLibrary_netCore.ConString
 {
-    public class FactoryConnectionString : IConnectStringAccess
-    {
-        public string GetConString => throw new NotImplementedException();
+    //public class FactoryConnectionString : IConnectStringAccess
+    //{
+    //    public string GetConString => throw new NotImplementedException();
 
-        public IConnectStringAccess CreateConnectionString(IConfiguration config, string connectionType)
-        {
-            return new ConnectStringAccess(config, connectionType);
-        }
-    }
+    //    public IConnectStringAccess CreateConnectionString(IConfiguration config, string connectionType)
+    //    {
+    //        return new ConnectStringAccess(config, connectionType);
+    //    }
+    //}
 }

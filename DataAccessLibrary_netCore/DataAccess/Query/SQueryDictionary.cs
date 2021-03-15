@@ -17,7 +17,7 @@ namespace DataAccessLibrary_netCore.DataAccess.Query
         }
         public  static List<TableScripts> GenerateScripts(string sciptName,string nameTable,string script, DynamicParameters paramters)
         {
-           // List<TableScripts> tableScripts = new List<TableScripts>();
+          
             tableScripts1.Add
                 (
                     new TableScripts 
@@ -33,7 +33,7 @@ namespace DataAccessLibrary_netCore.DataAccess.Query
        
         private static List<TableScripts> GetSavedScrtipts()
         {
-           // List<TableScripts> tableScripts = new List<TableScripts>();
+          
 
             DynamicParameters dynamicParameters0 = new DynamicParameters();
             dynamicParameters0.Add("@param_id", 50, DbType.Int32);
