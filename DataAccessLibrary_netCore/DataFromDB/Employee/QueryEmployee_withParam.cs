@@ -18,20 +18,14 @@ namespace DataAccessLibrary_netCore.DataFromDB.Employee
         {
             this.sQLDataAccessQuery = sQLDataAccessQuery;
         }
-
-        public Task<List<ModelEmployee>> GetEmployeeWithParameters(dbType db_type)
-        {
-            
-            var parameters = new DynamicParameters();
-            parameters.Add("@emloyee_id", 50, DbType.Int32);
-
-            string sql = @"select * from employee where employee_id > @emloyee_id";
-            return sQLDataAccessQuery.loadData_async<ModelEmployee, dynamic>(sql, parameters, db_type);
-        }
-
-        public Task<List<ModelEmployee>> GetEmployeeWithParametersAndQuery(TableScripts tableScript, dbType db_type)
+        public Task<List<ModelEmployee>> GetEmployees_async_param_TableScripts(TableScripts tableScript, dbType db_type)
         {
             return sQLDataAccessQuery.loadData_async<ModelEmployee, dynamic>(tableScript.Script, tableScript.paramters, db_type);
+        }
+
+        public List<ModelEmployee> GetEmployees_sync_param_TableScripts(TableScripts tableScript, dbType db_type)
+        {
+            return sQLDataAccessQuery.loadData_sync<ModelEmployee, dynamic>(tableScript.Script, tableScript.paramters, db_type);
         }
     }
 }
