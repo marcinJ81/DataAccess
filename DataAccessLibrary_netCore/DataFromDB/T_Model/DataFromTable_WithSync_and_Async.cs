@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace DataAccessLibrary_netCore.DataFromDB.T_Model
 {
-    public class QueryT_WithSync_and_Async<T> : ICreateQueryFromDB<T>
+    public class DataFromTable_With_Sync_and_Async<T> : ICreateQueryFromDB<T>
     {
         private readonly ISQLDataAccessQuery getDataFromDB;
-        public QueryT_WithSync_and_Async(ISQLDataAccessQuery sQLDataAccessQuery )
+        public DataFromTable_With_Sync_and_Async(ISQLDataAccessQuery sQLDataAccessQuery )
         {
             getDataFromDB = sQLDataAccessQuery;
         }

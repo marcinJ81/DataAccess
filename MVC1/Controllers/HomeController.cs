@@ -1,6 +1,7 @@
 ﻿using DataAccessLibrary_netCore.ConString;
 using DataAccessLibrary_netCore.DataAccess.Query;
 using DataAccessLibrary_netCore.DataFromDB.Employee;
+using DataAccessLibrary_netCore.DataFromDB.T_Model;
 using DataAccessLibrary_netCore.Dependency;
 using DataAccessLibrary_netCore.Model;
 using Microsoft.AspNetCore.Mvc;
@@ -18,25 +19,20 @@ namespace MVC1.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private ICreatorOfDBConnection connectToMSSql;
-        private IQueryEmployee queryEmployee;
-        private IQueryEmployee_withParam queryEmployee_With;
+        private ICreateQueryFromDB<ModelEmployee> createQueryFromDB;
 
         public HomeController(ILogger<HomeController> logger, IConfiguration configuration, ICreatorOfDBConnection connectToMSSql)
         {
             _logger = logger;
-            queryEmployee = new QueryEmployee(connectToMSSql.CreateObject_MSsql(configuration, "Production"));
-            queryEmployee_With = new QueryEmployee_withParam(connectToMSSql.CreateObject_MSsql(configuration, "Production"));
+            createQueryFromDB = new DataFromTable_With_Sync_and_Async<ModelEmployee>(connectToMSSql.CreateObject_MSsql(configuration, "Production"));          
         }
 
         public async Task<ActionResult> Index()
         {
-            // var employee = await queryEmployee.GetEmployees_async(dbType.mssql);
-            var employee = await queryEmployee_With.GetEmployeeWithParameters(dbType.mssql);
+            var getScripts = SQuerySelected.GetScritps.Where(x => x.ScriptName == "GetAllEmployees").First();
+            var employee = await createQueryFromDB.ASync_GetDataFromTable_Return_T(getScripts,dbType.mssql);
             return View(employee);
         }
-
-       
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
