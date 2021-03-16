@@ -1,5 +1,6 @@
 ﻿using DataAccessLibrary_netCore.DataAccess.Query;
 using DataAccessLibrary_netCore.DataFromDB.Employee;
+using DataAccessLibrary_netCore.DataFromDB.T_Model;
 using DataAccessLibrary_netCore.Dependency;
 using DataAccessLibrary_netCore.Model;
 using Microsoft.Extensions.Configuration;
@@ -18,7 +19,7 @@ namespace TestNunit.Test_Model
 
         private IConfiguration configuration;
         private ISQLDataAccessQuery accessQuery;
-        private IQueryEmployee_withParam queryEmployeeParam;
+        private ICreateQueryFromDB<ModelEmployee> getDataFromDB; 
 
         [SetUp]
         public void Setup()
@@ -34,17 +35,18 @@ namespace TestNunit.Test_Model
                 .AddInMemoryCollection(inMemorySettings)
                 .Build();
             var result = SDependencyContainer.getCreatorOfDBConnection;
-            accessQuery = result.CreateObject_MSsql(configuration, "Production");  
+            accessQuery = result.CreateObject_MSsql(configuration, "Production");
+            getDataFromDB = new DataFromTable_With_Sync_and_Async<ModelEmployee>(accessQuery);
         }
 
         [Test]
         public void ShouldGetAnyRecordFromEmployeeTable_sync()
         {
 
-            queryEmployeeParam = new QueryEmployee_withParam(accessQuery);
+           
             var resultQuery = SQuerySelected.GetScritps;
             var query = resultQuery.Where(x => x.ScriptName == "GetAllEmployees").First();
-            var result = queryEmployeeParam.GetEmployees_sync_param_TableScripts(query,dbType.mssql);          
+            var result = getDataFromDB.Sync_GetDataFromTable_Return_T(query,dbType.mssql);          
             Assert.IsTrue(result.Any());
 
         }
@@ -52,12 +54,12 @@ namespace TestNunit.Test_Model
         [Test]
         public void ShoulGetRows_asyncSQueryDictionary()
         {
-            queryEmployeeParam = new QueryEmployee_withParam(accessQuery);
+           
             var resultQuery = SQuerySelected.GetScritps;
             var query = resultQuery.Where(x => x.ScriptName == "GetEmloyeeWhenIdBiggerThen").First();
             Task.Run(async () =>
             { 
-                var result = await queryEmployeeParam.GetEmployees_async_param_TableScripts(query,dbType.mssql);
+                var result = await getDataFromDB.ASync_GetDataFromTable_Return_T(query,dbType.mssql);
                 // Actual test code here.
                 Assert.Greater(result.Count, 19);
 
@@ -67,13 +69,13 @@ namespace TestNunit.Test_Model
         [Test]
         public void ShouldGetAllRows_asyncSQuery_TableScripts()
         {
-            queryEmployeeParam = new QueryEmployee_withParam(accessQuery);
+            
             var resultQuery = SQuerySelected.GetScritps;
 
             var query = resultQuery.Where(x => x.ScriptName == "GetAllEmployees").First();
             Task.Run(async () =>
             {
-                var result = await queryEmployeeParam.GetEmployees_async_param_TableScripts(query, dbType.mssql);
+                var result = await getDataFromDB.ASync_GetDataFromTable_Return_T(query, dbType.mssql);
                 // Actual test code here.
                 Assert.Greater(result.Count, 0);
 
