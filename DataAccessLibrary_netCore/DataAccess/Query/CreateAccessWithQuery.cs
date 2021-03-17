@@ -16,13 +16,13 @@ namespace DataAccessLibrary_netCore.DataAccess.Query
        mssql,
        sqlite
     }
-    public class SQLDataAccessQuery : ISQLDataAccessQuery
+    public class CreateAccessWithQuery : ICreateAccessWithQuery
     {
         private string constring { get; set; }
         //private IDbConnection connectionToMSSQL; //do wykorzystania w tym miejsu zamiast ifa
         //private IDbConnection connectionToSQLite;
 
-        public SQLDataAccessQuery(IConnectStringAccess connectionStringAccess )
+        public CreateAccessWithQuery(IConnectStringAccess connectionStringAccess )
         {
             constring = connectionStringAccess.GetConString;
         }
@@ -45,14 +45,13 @@ namespace DataAccessLibrary_netCore.DataAccess.Query
             }
 
         }
-        List<T> ISQLDataAccessQuery.loadData_sync<T, U>(string sql, U parameters, dbType db_Type)
+        List<T> ICreateAccessWithQuery.loadData_sync<T, U>(string sql, U parameters, dbType db_Type)
         {
             if (db_Type == dbType.mssql)
             {
                 using (IDbConnection connection = new SqlConnection(constring))
                 {
                     var data = connection.Query<T>(sql, parameters);
-
                     return data.AsList();
                 }
             }

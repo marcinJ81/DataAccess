@@ -17,7 +17,6 @@ namespace DataAccessLibrary_netCore.DataAccess.Query
         }
         public  static List<TableScripts> GenerateScripts(string sciptName,string nameTable,string script, DynamicParameters paramters)
         {
-          
             tableScripts1.Add
                 (
                     new TableScripts 

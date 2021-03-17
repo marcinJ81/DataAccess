@@ -1,4 +1,5 @@
 ﻿using DataAccessLibrary_netCore.ConString;
+using DataAccessLibrary_netCore.DataAccess.Command;
 using DataAccessLibrary_netCore.DataAccess.Query;
 using DataAccessLibrary_netCore.DataFromDB.Employee;
 using Microsoft.Extensions.Configuration;
@@ -10,21 +11,35 @@ using System.Threading.Tasks;
 namespace DataAccessLibrary_netCore.Dependency
 {
 
+
     public class CreatorOfDBConnection : ICreatorOfDBConnection
     {
         private IConnectStringAccess constring;
       
         public CreatorOfDBConnection() { }
 
-        public ISQLDataAccessQuery CreateObject_MSsql(IConfiguration config, string constringTypes)
+       
+
+        public ICreateAccessWithQuery CreateConnectForQuery_MSsql(IConfiguration config, string constringTypes)
         {
             constring = new ConnectStringAccess(config, constringTypes);
-            return new SQLDataAccessQuery(constring);
+            return new CreateAccessWithQuery(constring);
         }
-        public ISQLDataAccessQuery CreateObject_SQLite(string tableNameSqlite)
+        public ICreateAccessWithQuery CreateConnectForQuery_SQLite(string tableNameSqlite)
         {
             constring = new ConnectStringAccess(tableNameSqlite);
-            return new SQLDataAccessQuery(constring);
+            return new CreateAccessWithQuery(constring);
+        }
+
+        public ICreateAccessWithCommand CreateConnectForCommand_MSsql(IConfiguration config, string constringTypes)
+        {
+            constring = new ConnectStringAccess(config, constringTypes);
+            return new CreateAccessWithCommand(constring);
+        }
+        public ICreateAccessWithCommand CreateConnectForCommand_SQLite(string tableNameSqlite)
+        {
+            constring = new ConnectStringAccess(tableNameSqlite);
+            return new CreateAccessWithCommand(constring);
         }
     }
 }

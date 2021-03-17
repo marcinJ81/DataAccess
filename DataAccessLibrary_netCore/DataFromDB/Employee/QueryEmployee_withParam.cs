@@ -12,9 +12,9 @@ namespace DataAccessLibrary_netCore.DataFromDB.Employee
 {
     public class QueryEmployee_withParam : IQueryEmployee_withParam
     {
-        private readonly ISQLDataAccessQuery sQLDataAccessQuery;
+        private readonly ICreateAccessWithQuery sQLDataAccessQuery;
 
-        public QueryEmployee_withParam(ISQLDataAccessQuery sQLDataAccessQuery)
+        public QueryEmployee_withParam(ICreateAccessWithQuery sQLDataAccessQuery)
         {
             this.sQLDataAccessQuery = sQLDataAccessQuery;
         }
