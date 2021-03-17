@@ -43,6 +43,7 @@ namespace DataAccessLibrary_netCore.DataAccess.Command
                 using (IDbConnection connection = new SqlConnection(constring))
                 {
                     connection.Execute(sql, parameters);
+                    return;
                 }
             }
             using (IDbConnection connection = new SqliteConnection(constring))
