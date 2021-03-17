@@ -1,4 +1,6 @@
-﻿using DataAccessLibrary_netCore.DataAccess.Query;
+﻿using Dapper;
+using DataAccessLibrary_netCore.DataAccess.Command;
+using DataAccessLibrary_netCore.DataAccess.Query;
 using DataAccessLibrary_netCore.DataFromDB.Employee;
 using DataAccessLibrary_netCore.DataFromDB.T_Model;
 using DataAccessLibrary_netCore.Dependency;
@@ -7,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +22,10 @@ namespace TestNunit.Test_Model
 
         private IConfiguration configuration;
         private ISQLDataAccessQuery accessQuery;
-        private ICreateQueryFromDB<ModelEmployee> getDataFromDB; 
+        private ICreateQueryFromDB<ModelEmployee> getDataFromDB;
+        private ICommandExecuteNonQuey execNonQuery;
+        private ICreateCommand command;
+        private ICreatorOfDBConnection connectDB;
 
         [SetUp]
         public void Setup()
@@ -34,9 +40,14 @@ namespace TestNunit.Test_Model
             this.configuration = new ConfigurationBuilder()
                 .AddInMemoryCollection(inMemorySettings)
                 .Build();
-            var result = SDependencyContainer.getCreatorOfDBConnection;
-            accessQuery = result.CreateObject_MSsql(configuration, "Production");
+            connectDB = SDependencyContainer.getCreatorOfDBConnection;
+            accessQuery = connectDB.CreateObject_MSsql(configuration, "Production");
             getDataFromDB = new DataFromTable_With_Sync_and_Async<ModelEmployee>(accessQuery);
+
+            command = 
+            execNonQuery = new CommandExecuteNonQuey()
+
+
         }
 
         [Test]
@@ -81,6 +92,31 @@ namespace TestNunit.Test_Model
 
             }).GetAwaiter().GetResult();
 
+        }
+        [Test]
+        public void ShouldInsertOneRow_async()
+        {
+            DynamicParameters dynamicParameters0 = new DynamicParameters();
+            dynamicParameters0.Add("@paramId", 100, DbType.Int32);
+            dynamicParameters0.Add("@paramName", "insert", DbType.AnsiStringFixedLength);
+            TableScripts tableScripts = new TableScripts() 
+            {
+                ScriptName = "insert",
+                NameTable = "employee",
+                Script = "insert into employee ([employee_id],[employee_name]) values (@paramId,@paramName)",
+                paramters = dynamicParameters0
+            };
+            SQuerySelected.GenerateScripts(tableScripts.ScriptName, tableScripts.NameTable, tableScripts.Script, tableScripts.paramters);
+
+
+            execNonQuery = new CommandExecuteNonQuey<ModelEmployee>()
+            Task.Run(async () =>
+            {
+                var result = await getDataFromDB.ASync_GetDataFromTable_Return_T(query, dbType.mssql);
+                // Actual test code here.
+                Assert.Greater(result.Count, 0);
+
+            }).GetAwaiter().GetResult();
         }
     }
 }
