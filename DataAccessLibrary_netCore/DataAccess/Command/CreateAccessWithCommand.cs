@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace DataAccessLibrary_netCore.DataAccess.Command
 {
-    public class CreateCommand : ICreateCommand
+    public class CreateAccessWithCommand : ICreateAccessWithCommand
     {
         private string constring { get; set; }
-        public CreateCommand(IConnectStringAccess connectionStringAccess)
+        public CreateAccessWithCommand(IConnectStringAccess connectionStringAccess)
         {
             constring = connectionStringAccess.GetConString;
         }
@@ -26,6 +26,7 @@ namespace DataAccessLibrary_netCore.DataAccess.Command
                 using (IDbConnection connection = new SqlConnection(constring))
                 {
                     await connection.ExecuteAsync(sql, parameters);
+                    return;
                 }
             }
             using (IDbConnection connection = new SqliteConnection(constring))

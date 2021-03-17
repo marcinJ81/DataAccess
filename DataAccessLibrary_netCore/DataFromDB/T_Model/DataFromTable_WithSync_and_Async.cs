@@ -9,8 +9,8 @@ namespace DataAccessLibrary_netCore.DataFromDB.T_Model
 {
     public class DataFromTable_With_Sync_and_Async<T> : ICreateQueryFromDB<T>
     {
-        private readonly ISQLDataAccessQuery getDataFromDB;
-        public DataFromTable_With_Sync_and_Async(ISQLDataAccessQuery sQLDataAccessQuery )
+        private readonly ICreateAccessWithQuery getDataFromDB;
+        public DataFromTable_With_Sync_and_Async(ICreateAccessWithQuery sQLDataAccessQuery )
         {
             getDataFromDB = sQLDataAccessQuery;
         }

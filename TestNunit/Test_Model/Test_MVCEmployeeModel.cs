@@ -21,10 +21,10 @@ namespace TestNunit.Test_Model
     {
 
         private IConfiguration configuration;
-        private ISQLDataAccessQuery accessQuery;
+        private ICreateAccessWithQuery accessQuery;
         private ICreateQueryFromDB<ModelEmployee> getDataFromDB;
         private ICommandExecuteNonQuey execNonQuery;
-        private ICreateCommand command;
+        private ICreateAccessWithCommand command;
         private ICreatorOfDBConnection connectDB;
 
         [SetUp]
@@ -41,11 +41,12 @@ namespace TestNunit.Test_Model
                 .AddInMemoryCollection(inMemorySettings)
                 .Build();
             connectDB = SDependencyContainer.getCreatorOfDBConnection;
-            accessQuery = connectDB.CreateObject_MSsql(configuration, "Production");
+            // query
+            accessQuery = connectDB.CreateConnectForQuery_MSsql(configuration, "Production");
             getDataFromDB = new DataFromTable_With_Sync_and_Async<ModelEmployee>(accessQuery);
-
-            command = 
-            execNonQuery = new CommandExecuteNonQuey()
+            //command
+            command = connectDB.CreateConnectForCommand_MSsql(configuration, "Production");
+            execNonQuery = new CommandExecuteNonQuey<ModelEmployee>(command);
 
 
         }
@@ -96,8 +97,9 @@ namespace TestNunit.Test_Model
         [Test]
         public void ShouldInsertOneRow_async()
         {
+            int idE = 104;
             DynamicParameters dynamicParameters0 = new DynamicParameters();
-            dynamicParameters0.Add("@paramId", 100, DbType.Int32);
+            dynamicParameters0.Add("@paramId", idE, DbType.Int32);
             dynamicParameters0.Add("@paramName", "insert", DbType.AnsiStringFixedLength);
             TableScripts tableScripts = new TableScripts() 
             {
@@ -108,15 +110,17 @@ namespace TestNunit.Test_Model
             };
             SQuerySelected.GenerateScripts(tableScripts.ScriptName, tableScripts.NameTable, tableScripts.Script, tableScripts.paramters);
 
-
-            execNonQuery = new CommandExecuteNonQuey<ModelEmployee>()
             Task.Run(async () =>
             {
-                var result = await getDataFromDB.ASync_GetDataFromTable_Return_T(query, dbType.mssql);
+                await execNonQuery.ASync_ExecuteNonQuey(tableScripts, dbType.mssql);
                 // Actual test code here.
-                Assert.Greater(result.Count, 0);
-
             }).GetAwaiter().GetResult();
+
+            var resultQuery = SQuerySelected.GetScritps;
+            var query = resultQuery.Where(x => x.ScriptName == "GetAllEmployees").First();
+            var result = getDataFromDB.Sync_GetDataFromTable_Return_T(query, dbType.mssql);
+            int id = result.OrderByDescending(x => x.employee_id).FirstOrDefault().employee_id;
+            Assert.AreEqual(idE, id);
         }
     }
 }

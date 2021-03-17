@@ -14,12 +14,12 @@ namespace TestNunit.Test_Model
    public class Test_GetEmployees
     {
         private IConnectStringAccess constring;
-        private ISQLDataAccessQuery query;
+        private ICreateAccessWithQuery query;
         [SetUp]
         public void Setup()
         {
             constring = new ConnectStringAccess("Employee");
-            query = new SQLDataAccessQuery(constring);
+            query = new CreateAccessWithQuery(constring);
         }
 
         [Test]

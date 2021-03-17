@@ -9,9 +9,9 @@ namespace DataAccessLibrary_netCore.DataFromDB.T_Model
 {
     public class CommandExecuteNonQuey<T> : ICommandExecuteNonQuey
     {
-        private ICreateCommand createCommnad;
+        private ICreateAccessWithCommand createCommnad;
 
-        public CommandExecuteNonQuey(ICreateCommand createCommnad)
+        public CommandExecuteNonQuey(ICreateAccessWithCommand createCommnad)
         {
             this.createCommnad = createCommnad;
         }
